@@ -30,11 +30,7 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (status === '' && urlInput.length > 0) {
-      const ids = urls.map((url) => url.id);
-      const maxId = ids.length > 0
-        ? Math.max(...ids) + 1
-        : 0;
-      const urlToAdd = { id: maxId || 0, longUrl: urlInput, shortUrl: 'test3' };
+      const urlToAdd = { longUrl: urlInput };
       urlService
         .create(urlToAdd)
         .then((newUrl) => {
