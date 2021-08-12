@@ -58,8 +58,8 @@ function App() {
               <li key={url.id}>
                 <span className="long-link">{url.longUrl}</span>
                 <span className="short-link">
-                  <a href={process.env.REACT_APP_API_URL.concat(url.shortUrl)}>
-                    {process.env.REACT_APP_API_URL}
+                  <a href={`${process.env.REACT_APP_API_URL}/${url.shortUrl}`}>
+                    {`${process.env.REACT_APP_API_URL}/${url.shortUrl}`}
                   </a>
                 </span>
               </li>
