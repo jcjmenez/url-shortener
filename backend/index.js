@@ -29,6 +29,11 @@ app.get('/api/urls', (req, res) => {
 
 app.post('/api/urls', (req, res) => {
     const url = req.body
+    if (!url || !url.longUrl) {
+        res.status(400).json({
+            error: 'Long url is missing'
+        })
+    }
     const ids = urls.map((url) => url.id);
     const maxId = ids.length > 0
     ? Math.max(...ids)
@@ -41,14 +46,29 @@ app.post('/api/urls', (req, res) => {
     }
     urls = [...urls, urlToAdd]
     console.log(urls)
-    res.json(urlToAdd)
+    res.status(201).json(urlToAdd)
 })
 
 app.get('/:url', (req, res) => {
     const shortUrl = req.params.url
     const redirectUrl = urls.find((url) => url.shortUrl === shortUrl)
-    res.redirect(301, redirectUrl.longUrl)
+    console.log(redirectUrl)
+    if (redirectUrl) {
+        res.redirect(301, redirectUrl.longUrl)
+    }
+    else {
+        res.status(404).json({
+            error: 'Wrong url'
+        })
+    }
+    
 })
+
+app.use((req, res) => {
+    res.status(404).json({
+        error: 'Not found'
+    })
+})  
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT)
