@@ -15,7 +15,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isValidUrl(urlInput) || urlInput === '' || urlInput.includes('http://localhost:3000')) {
+    if (isValidUrl(urlInput) || urlInput === '' || urlInput.includes('http://localhost')) {
       setStatus('');
     } else {
       setStatus('Url must be valid');
@@ -49,13 +49,20 @@ function App() {
       <h3>{status}</h3>
       <hr />
 
-      <div>
+      <div className="shorted-links">
         <h2>Shorted urls</h2>
-        <ul>
+        <ul className="recent-links">
           {
           urls.length > 0
             ? urls.map((url) => (
-              <li key={url.id}>{url.longUrl}</li>
+              <li key={url.id}>
+                <span className="long-link">{url.longUrl}</span>
+                <span className="short-link">
+                  <a href={process.env.REACT_APP_API_URL.concat(url.shortUrl)}>
+                    {process.env.REACT_APP_API_URL}
+                  </a>
+                </span>
+              </li>
             ))
             : 'Input a url to short'
           }
