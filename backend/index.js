@@ -10,12 +10,14 @@ let urls = [
     {
         id: 0,
         longUrl: "https://www.youtube.com/",
-        shortUrl: "aaaaaaa"
+        shortUrl: "aaaaaaa",
+        clicks: 0
     },
     {
         id: 1,
         longUrl: "https://stackoverflow.com/",
-        shortUrl: "bbbbbbb"
+        shortUrl: "bbbbbbb",
+        clicks: 0
     }
 ]
 
@@ -42,7 +44,8 @@ app.post('/api/urls', (req, res) => {
     const urlToAdd = {
         id: maxId + 1,
         longUrl: url.longUrl,
-        shortUrl: nanoid()
+        shortUrl: nanoid(),
+        clicks: 0
     }
     urls = [...urls, urlToAdd]
     console.log(urls)
@@ -52,6 +55,8 @@ app.post('/api/urls', (req, res) => {
 app.get('/:url', (req, res) => {
     const shortUrl = req.params.url
     const redirectUrl = urls.find((url) => url.shortUrl === shortUrl)
+    redirectUrl.clicks += 1
+    
     console.log(redirectUrl)
     if (redirectUrl) {
         res.redirect(301, redirectUrl.longUrl)
