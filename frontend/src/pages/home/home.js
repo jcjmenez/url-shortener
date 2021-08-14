@@ -27,7 +27,8 @@ const Home = () => {
       urlService
         .create(urlToAdd)
         .then((newUrl) => {
-          setUrls([...urls, newUrl]);
+          const { longUrl, shortUrl } = newUrl;
+          setUrls([...urls, { longUrl, shortUrl }]);
         });
     }
   };
@@ -48,7 +49,7 @@ const Home = () => {
           {
           urls.length > 0
             ? urls.map((url) => (
-              <li key={url.id}>
+              <li key={url.shortUrl}>
                 <span className="long-link">{url.longUrl}</span>
                 <span className="short-link">
                   <a href={`${process.env.REACT_APP_API_URL}/${url.shortUrl}`}>
