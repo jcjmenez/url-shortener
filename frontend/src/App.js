@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import Home from './pages/home/home';
+import Top from './pages/top-urls/top-urls';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Router>
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/top" component={Top} />
             <Redirect from="/" to="/" />
           </Switch>
         </Router>

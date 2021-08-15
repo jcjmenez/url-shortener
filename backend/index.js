@@ -7,7 +7,7 @@ const app = express();
 const cors = require('cors');
 
 const { customAlphabet } = require('nanoid/non-secure');
-const Url = require('./models/Url');
+const Url = require('./models/url');
 
 app.use(cors());
 app.use(express.json());
