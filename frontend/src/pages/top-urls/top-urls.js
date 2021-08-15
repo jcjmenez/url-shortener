@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import urlService from '../../services/urls';
 
-const Home = () => {
+const Top = () => {
   const [urls, setUrls] = useState([]);
 
   const compare = (a, b) => {
@@ -33,4 +33,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Top;
