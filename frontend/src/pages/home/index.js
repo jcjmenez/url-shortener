@@ -35,7 +35,7 @@ const Home = () => {
 
   return (
     <div className="App">
-      <h1>URL Shortener</h1>
+      <h1>Short a URL</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" name="url" onChange={handleUrlChange} />
         <input type="submit" value="Short" />
