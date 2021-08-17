@@ -26,9 +26,16 @@ const Top = () => {
   return (
     <div className="App">
       <h1>Top Urls</h1>
-      <ul>
-        {urls.map((url) => <li key={url.shortUrl}>{url.shortUrl}</li>)}
-      </ul>
+      {
+        urls.length > 0
+          ? (
+            <ul>
+              {urls.map((url) => <li key={url.shortUrl}>{url.shortUrl}</li>)}
+            </ul>
+          )
+          : <p>No urls to show</p>
+      }
+
     </div>
   );
 };
