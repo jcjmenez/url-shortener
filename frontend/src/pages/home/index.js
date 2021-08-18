@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import isValidUrl from '../../helpers/is-valid-url';
 import urlService from '../../services/urls';
+import './styles.css';
 
 const Home = () => {
   const [urlInput, setUrlInput] = useState('');
   const [urls, setUrls] = useState([]);
   const [status, setStatus] = useState('');
+  const [copyStatus, setCopyStatus] = useState('copy');
 
   useEffect(() => {
     if (isValidUrl(urlInput) || urlInput === '' || urlInput.includes('http://localhost')) {
@@ -35,33 +37,50 @@ const Home = () => {
 
   return (
     <div className="App">
-      <h1>Short a URL</h1>
+      <h1>Shorten your link</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" name="url" onChange={handleUrlChange} />
-        <input type="submit" value="Short" />
+        <input type="submit" value="Shorten" />
       </form>
       <h3>{status}</h3>
       <hr />
-
-      <div className="shorted-links">
-        <h2>Shorted urls</h2>
-        <ul className="recent-links">
-          {
+      <section className="urls">
+        <div className="shorted-links">
+          <ul className="recent-links">
+            {
           urls.length > 0
             ? urls.map((url) => (
-              <li key={url.shortUrl}>
+              <li key={url.shortUrl} className="link">
                 <span className="long-link">{url.longUrl}</span>
-                <span className="short-link">
-                  <a href={`${process.env.REACT_APP_API_URL}/${url.shortUrl}`}>
-                    {`${process.env.REACT_APP_API_URL}/${url.shortUrl}`}
-                  </a>
+                <span>
+                  <span className="short-link">
+                    <a href={`${process.env.REACT_APP_API_URL}/${url.shortUrl}`}>
+                      {`${process.env.REACT_APP_API_URL}/${url.shortUrl}`}
+                    </a>
+                  </span>
+                  <span className="copy">
+                    <button
+                      type="button"
+                      className={`button ${copyStatus}`}
+                      onClick={() => {
+                        setCopyStatus('copied');
+                        navigator.clipboard.writeText(`${process.env.REACT_APP_API_URL}/${url.shortUrl}`);
+                        setTimeout(() => {
+                          setCopyStatus('copy');
+                        }, 1000);
+                      }}
+                    >
+                      {copyStatus}
+                    </button>
+                  </span>
                 </span>
               </li>
             ))
-            : 'Input a url to short'
+            : 'No recent links shorted'
           }
-        </ul>
-      </div>
+          </ul>
+        </div>
+      </section>
     </div>
   );
 };
