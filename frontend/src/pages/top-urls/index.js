@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Url from '../../components/url';
 import urlService from '../../services/urls';
 
 const Top = () => {
@@ -26,16 +27,21 @@ const Top = () => {
   return (
     <div className="App">
       <h1>Top Urls</h1>
-      {
-        urls.length > 0
-          ? (
-            <ul>
-              {urls.map((url) => <li key={url.shortUrl}>{url.shortUrl}</li>)}
-            </ul>
-          )
-          : <p>No urls to show</p>
-      }
-
+      <section className="urls">
+        <div className="shorted-links">
+          <ul className="recent-links">
+            {
+          urls.length > 0
+            ? urls.map((url) => (
+              <li key={url.shortUrl} className="link">
+                <Url shortUrl={url.shortUrl} longUrl={url.longUrl} />
+              </li>
+            ))
+            : 'No links shorted'
+          }
+          </ul>
+        </div>
+      </section>
     </div>
   );
 };

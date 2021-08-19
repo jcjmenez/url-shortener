@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Url from '../../components/url';
 import isValidUrl from '../../helpers/is-valid-url';
 import urlService from '../../services/urls';
 import './styles.css';
@@ -7,7 +8,6 @@ const Home = () => {
   const [urlInput, setUrlInput] = useState('');
   const [urls, setUrls] = useState([]);
   const [status, setStatus] = useState('');
-  const [copyStatus, setCopyStatus] = useState('copy');
 
   useEffect(() => {
     if (isValidUrl(urlInput) || urlInput === '' || urlInput.includes('http://localhost')) {
@@ -51,29 +51,7 @@ const Home = () => {
           urls.length > 0
             ? urls.map((url) => (
               <li key={url.shortUrl} className="link">
-                <span className="long-link">{url.longUrl}</span>
-                <span>
-                  <span className="short-link">
-                    <a href={`${process.env.REACT_APP_API_URL}/${url.shortUrl}`}>
-                      {`${process.env.REACT_APP_API_URL}/${url.shortUrl}`}
-                    </a>
-                  </span>
-                  <span className="copy">
-                    <button
-                      type="button"
-                      className={`button ${copyStatus}`}
-                      onClick={() => {
-                        setCopyStatus('copied');
-                        navigator.clipboard.writeText(`${process.env.REACT_APP_API_URL}/${url.shortUrl}`);
-                        setTimeout(() => {
-                          setCopyStatus('copy');
-                        }, 1000);
-                      }}
-                    >
-                      {copyStatus}
-                    </button>
-                  </span>
-                </span>
+                <Url shortUrl={url.shortUrl} longUrl={url.longUrl} />
               </li>
             ))
             : 'No recent links shorted'

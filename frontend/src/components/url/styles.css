@@ -1,0 +1,57 @@
+
+.shorted-links {
+    position: relative;
+    width: 60%;
+    overflow: auto;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.recent-links {
+    list-style: none;
+}
+
+.link {
+    display: flex;
+    padding: 15px 20px;
+    justify-content: space-between;
+}
+
+.long-link {
+    padding: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 500px;
+    min-width: 100px;
+    display: inline-block;
+}
+
+.short-link a {
+    color: #0c5eca;
+    padding: 50px;
+}
+
+.button {
+    border: none;
+    color: white;
+    width: 100px;
+    padding: 7px 25px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.copy {
+    color: #0c5eca;
+    background-color: #a9ceff;
+
+}
+
+.copied {
+    color: #158324;
+    background-color: #a9ffb5;
+}
